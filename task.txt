@@ -1,0 +1,64 @@
+package example;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Example {
+	static boolean b = false;
+	static int count = 0;
+	public static void main(String[] args) {
+		Scanner s= new Scanner(System.in);
+		System.out.print("Enter no. of elements you want in array:");
+        int size = s.nextInt();
+        Integer intArr[] = new Integer[size];
+        System.out.println("Enter all the elements:");
+        for(int i = 0; i< size ; i++) {
+        	intArr[i] = s.nextInt();
+        }
+        
+        intArr =  checkLeftElement(intArr);
+        
+        }
+	
+	 
+	private static Integer[] checkLeftElement(Integer[] intArr) {
+		for(int i = 0; i < intArr.length; i++){
+        	if(i+1 <  intArr.length){
+              if(intArr[i] < intArr[i+1]){
+            	  b = true;
+            	  intArr = removeElementUsingCollection(intArr, i+1);
+              }else {
+            	  b = false;
+              }
+            }	
+        	
+        }
+		
+		
+	        
+		if (b) {
+			count++;
+			 System.out.println("\nElements -- " );
+			 System.out.println("\n day-- "+count );
+		        for(int i = 0; i < intArr.length; i++){
+		          System.out.print(" " + intArr[i]);
+		        }
+		        
+			return checkLeftElement(intArr);
+			 
+		}else {
+			return intArr;
+		}
+		
+	}
+
+
+	public static Integer[] removeElementUsingCollection( Integer[] arr, int index ){
+		 ArrayList<Integer> tempList = new ArrayList<Integer>(Arrays.asList(arr));
+	      tempList.remove(index);
+	      return tempList.toArray(new Integer[0]);
+	  }	
+	
+}
